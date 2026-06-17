@@ -88,6 +88,7 @@ def make_some_presets(path: str) :
             idx = globals.CONTINUOUS_KNOB_ORDER[name]
             if np.float64(param) != input_knobs[idx] :
                 final_knobs[idx] = np.float64(param) - input_knobs[idx] #itsa delta
+                print(f"{name} has been changed")
                 active_mask_cont[idx] = 1
                 if(final_knobs[idx] > 0) :
                     polarity_cont[idx] = 1
@@ -107,6 +108,7 @@ def make_some_presets(path: str) :
             final_switches[idx] = np.float64(param)
             if np.float64(param) != input_switches[idx] :
                 active_mask_switch[idx] = 1
+                print(f"{name} has been changed")
                 if(final_switches[idx] == 1) : 
                     polarity_switch[idx] = 1
                 else :
@@ -120,6 +122,7 @@ def make_some_presets(path: str) :
             final_modes[idx] = norm_idx
 
             if norm_param != input_modes[idx] : 
+                print(f"{name} has been changed")
                 active_mask_mode[idx] = 1
 
 
@@ -167,7 +170,6 @@ def make_some_presets(path: str) :
             idx = globals.CONTINUOUS_KNOB_ORDER[name]
             continuous_targets[idx] = round(np.float32(param), globals.DECIMALS) # Store the value of the updated xml
             if neutral_param[name] != continuous_targets[idx] : # Check to see if the parameter is off-neutral, if so, mark it as actively changed
-                print(f"{name} has been changed")
                 active_mask_cont[idx] = 1 
 
             if neutral_param[name] < continuous_targets[idx] :
@@ -182,7 +184,6 @@ def make_some_presets(path: str) :
             idx = globals.SWITCH_ORDER[name]
             switch_targets[idx] = round(np.float32(param), globals.DECIMALS) # Store the value of the updated xml
             if neutral_param[name] != switch_targets[idx] :
-                print(f"{name} has been changed")
                 active_mask_switch[idx] = 1
 
             if switch_targets[idx] == 0 :
@@ -199,7 +200,6 @@ def make_some_presets(path: str) :
             mode_targets[idx] = norm_idx #remember, the target here is the index in the respective mode bank...we are storing value of the current xml
 
             if neutral_param[name] != np.float32(norm_param) :
-                print(f"{name} has been changed")
                 active_mask_mode[idx] = 1
 
 
