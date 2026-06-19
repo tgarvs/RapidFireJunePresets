@@ -128,18 +128,21 @@ def make_some_presets(path: str) :
 
     init_list = np.concatenate((input_knobs, input_switches, input_modes), axis=0)
     
-    for d in tweakDescriptions :
-        utils.write_to_database(d, utils.token_embed(d), init_list, 
-                        final_knobs, final_switches, final_modes, 
-                        level="", origin="homemade", 
-                        request_type_text=globals.ROUTER_TYPE_LIST[0], request_type=0, 
-                        description_name="", 
-                        active_mask_cont=active_mask_cont, 
-                        active_mask_switch=active_mask_switch, 
-                        active_mask_mode=active_mask_mode,
-                        polarity_cont=polarity_cont,
-                        polarity_switch=polarity_switch,
-                        level_cont=level_cont)
+    try: 
+        for d in tweakDescriptions :
+            utils.write_to_database(d, utils.token_embed(d), init_list, 
+                            final_knobs, final_switches, final_modes, 
+                            level="", origin="homemade", 
+                            request_type_text=globals.ROUTER_TYPE_LIST[0], request_type=0, 
+                            description_name="", 
+                            active_mask_cont=active_mask_cont, 
+                            active_mask_switch=active_mask_switch, 
+                            active_mask_mode=active_mask_mode,
+                            polarity_cont=polarity_cont,
+                            polarity_switch=polarity_switch,
+                            level_cont=level_cont)
+    except Exception as e:
+        print(f"[bold red]Failed to save tweak descriptions: {e}[/bold red]")
         
 
 
@@ -203,20 +206,21 @@ def make_some_presets(path: str) :
                 active_mask_mode[idx] = 1
 
 
-
-    for d in patchDescriptions :
-        utils.write_to_database(d, utils.token_embed(d), init_list, 
-                        continuous_targets, switch_targets, mode_targets, 
-                        level="", origin="homemade", 
-                        request_type_text=globals.ROUTER_TYPE_LIST[1], request_type=1, 
-                        description_name="", 
-                        active_mask_cont=active_mask_cont, 
-                        active_mask_switch=active_mask_switch, 
-                        active_mask_mode=active_mask_mode,
-                        polarity_cont=polarity_cont,
-                        polarity_switch=polarity_switch,
-                        level_cont=level_cont)
-        
+    try:
+        for d in patchDescriptions :
+            utils.write_to_database(d, utils.token_embed(d), init_list, 
+                            continuous_targets, switch_targets, mode_targets, 
+                            level="", origin="homemade", 
+                            request_type_text=globals.ROUTER_TYPE_LIST[1], request_type=1, 
+                            description_name="", 
+                            active_mask_cont=active_mask_cont, 
+                            active_mask_switch=active_mask_switch, 
+                            active_mask_mode=active_mask_mode,
+                            polarity_cont=polarity_cont,
+                            polarity_switch=polarity_switch,
+                            level_cont=level_cont)
+    except Exception as e:
+        print(f"[bold red]Failed to save patch descriptions: {e}[/bold red]")
 
 
 
